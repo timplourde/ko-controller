@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <title>Simple Knockout Controller Example</title>
+    <style>
+        body {
+            padding: 2rem;
+            font-family:sans-serif;
+        }
+        h2 {
+            color: orange;
+        }
+        .view-container {
+            -moz-transition: opacity .3s;
+            -o-transition: opacity .3s;
+            -webkit-transition: opacity .3s;
+            transition: opacity .3s, transform .3s;
+        }
+        .is-transitioning {
+            opacity: 0;
+            transform: translate(-30px,0px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Simple Knockout Controller Example</h4>
+
+    <div class="view-container" data-bind="component: { 
+            name: controller.viewName, 
+            params: controller.viewParams }, 
+        css: {'is-transitioning': controller.isTransitioning}"></div>
+
+    <template id="list-view">
+        <h2 data-bind="text: name"></h2>
+        <div data-bind="foreach: items">
+            <p>
+                <a data-bind="attr: {href: '#/items/'+$data}, text: 'Item #'+$data"></a> 
+            </p>
+        </div>
+    </template>
+
+    <template id="details-view">
+        <h2 data-bind="text: name"></h2>
+        <a href="#/items">go to list</a>
+    </template>
+
+    <template id="not-found">
+        <h2>404: View Not Found</h2>
+        <a href="#/items">go to list</a>
+    </template>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+    <script src="grapnel.min.js"></script>
+    <script src="ko-controller.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
